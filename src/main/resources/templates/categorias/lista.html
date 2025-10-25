@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Categorías</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+</head>
+<body class="bg-light">
+
+<div class="container mt-4">
+  <div class="d-flex align-items-center">
+    <h2 class="mb-0">Categorías</h2>
+    <a class="btn btn-primary ms-auto" th:href="@{/categorias/nueva}">Nueva categoría</a>
+  </div>
+
+  <!-- Alertas -->
+  <div th:if="${ok}" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+    <span th:text="${ok}">Operación exitosa.</span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+  </div>
+  <div th:if="${error}" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+    <span th:text="${error}">Ocurrió un error.</span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+  </div>
+
+  <table class="table table-bordered table-hover mt-3">
+    <thead class="table-dark text-center">
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th style="width: 180px;">Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cat : ${categorias}">
+      <td th:text="${cat.idCategoria}">1</td>
+      <td th:text="${cat.nombreCategoria}">Nombre</td>
+      <td th:text="${cat.descripcion}">Descripción</td>
+      <td class="text-center">
+        <a class="btn btn-sm btn-warning"
+           th:href="@{|/categorias/${cat.idCategoria}/editar|}">Editar</a>
+
+        <!-- Disparador de modal -->
+        <button type="button" class="btn btn-sm btn-danger"
+                data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
+                th:attr="data-action=@{|/categorias/${cat.idCategoria}/eliminar|},
+                         data-label=${'la categoría «' + cat.nombreCategoria + '»'}">
+          Eliminar
+        </button>
+      </td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(categorias)}">
+      <td colspan="4" class="text-center text-muted">No hay categorías.</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a class="btn btn-secondary" th:href="@{/productos}">Ver productos</a>
+</div>
+
+<!-- Modal reutilizable -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-lg">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-0" id="confirm-text">¿Seguro que deseas eliminar este registro?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <form id="confirm-form" method="post">
+          <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS + script para inyectar acción/texto -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const modalEl = document.getElementById('confirmDeleteModal');
+    modalEl.addEventListener('show.bs.modal', function (event) {
+      const button = event.relatedTarget;
+      const action = button.getAttribute('data-action');
+      const label  = button.getAttribute('data-label');
+      modalEl.querySelector('#confirm-form').setAttribute('action', action);
+      modalEl.querySelector('#confirm-text').textContent =
+        '¿Seguro que deseas eliminar ' + (label || 'este registro') + '?';
+    });
+  });
+</script>
+</body>
+</html>

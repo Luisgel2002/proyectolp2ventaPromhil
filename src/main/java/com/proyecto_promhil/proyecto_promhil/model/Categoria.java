@@ -1,14 +1,8 @@
 package com.proyecto_promhil.proyecto_promhil.model;
 
 import org.hibernate.annotations.DynamicInsert;
-
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -27,9 +21,12 @@ public class Categoria {
 
     @Column(name = "descripcion")
     private String descripcion;
-    
-    
+
+    @Column(name = "estado", nullable = false)
+    private Boolean estado = true;
+
+    @Override
     public String toString() {
-    	return descripcion;
+        return descripcion;
     }
 }
