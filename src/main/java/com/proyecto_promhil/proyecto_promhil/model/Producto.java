@@ -29,8 +29,9 @@ public class Producto {
     @Column(name = "nombre_producto")
     private String nombreProducto;
 
-    @Column(name = "precio")
-    private Double precio;
+    @NotNull
+    @Column(name = "precio", nullable = false, precision = 10, scale = 2)
+    private BigDecimal precio;
 
   
     @Column(name = "stock")

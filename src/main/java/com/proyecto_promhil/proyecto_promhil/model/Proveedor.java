@@ -21,7 +21,7 @@ public class Proveedor {
     @Column(name = "id_proveedor")
     private Integer idProveedor;
 
-    @Column(name = "nombre_preveedor")
+    @Column(name = "nombre_proveedor")
     private String nombreProveedor;
 
  

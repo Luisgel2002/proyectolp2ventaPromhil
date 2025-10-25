@@ -26,6 +26,10 @@ public class Venta {
   
     @Column(name = "fecha")
     private LocalDate fecha;
+    
+    @NotNull
+    @Column(name = "total", nullable = false, precision = 10, scale = 2)
+    private BigDecimal total;
 
   
     @ManyToOne

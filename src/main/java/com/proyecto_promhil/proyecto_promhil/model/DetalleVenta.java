@@ -34,5 +34,5 @@ public class DetalleVenta {
 
     @NotNull
     @Column(name = "subtotal", nullable = false, precision = 10, scale = 2)
-    private Double subtotal;
+    private BigDecimal subtotal;
 }

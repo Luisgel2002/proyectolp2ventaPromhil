@@ -37,5 +37,5 @@ public class Compra {
 
     @NotNull
     @Column(name = "total", nullable = false, precision = 10, scale = 2)
-    private Double total;
+    private BigDecimal total;
 }
