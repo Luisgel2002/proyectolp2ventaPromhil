@@ -1,31 +1,35 @@
 package com.proyecto_promhil.proyecto_promhil.model;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "categorias")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@DynamicInsert
+@Getter @Setter
 public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_categoria")
-    private Integer id;
+    private Integer idCategoria;
 
-    @NotBlank
-    @Size(max = 100)
-    @Column(name = "nombre_categoria", nullable = false, length = 100)
-    private String nombre;
+    @Column(name = "nombre_categoria")
+    private String nombreCategoria;
 
-    @NotBlank
-    @Size(max = 150)
-    @Column(name = "descripcion", nullable = false, length = 150)
+    @Column(name = "descripcion")
     private String descripcion;
+    
+    
+    public String toString() {
+    	return descripcion;
+    }
 }

@@ -1,40 +1,38 @@
 package com.proyecto_promhil.proyecto_promhil.model;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "proveedores")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@DynamicInsert
+@Getter @Setter
 public class Proveedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_proveedor")
-    private Integer id;
+    private Integer idProveedor;
 
-    @NotBlank
-    @Size(max = 100)
-    @Column(name = "nombre_preveedor", nullable = false, length = 100)
-    private String nombre;
+    @Column(name = "nombre_preveedor")
+    private String nombreProveedor;
 
-    @NotBlank
-    @Size(max = 100)
-    @Column(name = "contacto", nullable = false, length = 100)
+ 
+    @Column(name = "contacto")
     private String contacto;
 
-    @NotBlank
-    @Size(max = 9)
-    @Column(name = "telefono_provee", nullable = false, length = 9)
+   
+    @Column(name = "telefono_provee")
     private String telefono;
 
-    @NotBlank
-    @Size(max = 100)
-    @Column(name = "direccion", nullable = false, length = 100)
+    
+    @Column(name = "direccion")
     private String direccion;
 }

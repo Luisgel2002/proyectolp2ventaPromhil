@@ -6,38 +6,29 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "clientes")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter
 public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cliente")
-    private Integer id;
+    private Integer idCliente;
 
-    @NotBlank
-    @Size(max = 100)
-    @Column(name = "nombre_cliente", nullable = false, length = 100)
-    private String nombre;
+    @Column(name = "nombre_cliente")
+    private String nombreCliente;
 
-    @NotBlank
-    @Email
-    @Size(max = 100)
-    @Column(name = "correo", nullable = false, length = 100)
+    @Column(name = "correo")
     private String correo;
 
-    @NotBlank
-    @Size(max = 9)
-    @Column(name = "telefono_cli", nullable = false, length = 9)
+    @Column(name = "telefono_cli")
     private String telefono;
-
-    @NotBlank
-    @Size(max = 100)
-    @Column(name = "direccion", nullable = false, length = 100)
+    
+    @Column(name = "direccion")
     private String direccion;
 }

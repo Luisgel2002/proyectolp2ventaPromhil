@@ -6,35 +6,33 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "detalle_venta")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter
 public class DetalleVenta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_detalle")
-    private Integer id;
+    private Integer idDetalle;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_venta", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_venta")
     private Venta venta;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_producto", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_producto")
     private Producto producto;
 
-    @NotNull
-    @Column(name = "cantidad", nullable = false)
+    
+    @Column(name = "cantidad")
     private Integer cantidad;
 
     @NotNull
     @Column(name = "subtotal", nullable = false, precision = 10, scale = 2)
-    private BigDecimal subtotal;
+    private Double subtotal;
 }

@@ -5,13 +5,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "metodos_pago")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter
 public class MetodoPago {
 
     @Id
@@ -19,13 +19,11 @@ public class MetodoPago {
     @Column(name = "id_metodo")
     private Integer id;
 
-    @NotBlank
-    @Size(max = 50)
-    @Column(name = "tipo_metodo", nullable = false, length = 50)
+
+    @Column(name = "tipo_metodo")
     private String tipo;
 
-    @NotBlank
-    @Size(max = 100)
-    @Column(name = "descripcion", nullable = false, length = 100)
+  
+    @Column(name = "descripcion")
     private String descripcion;
 }
